@@ -51,6 +51,7 @@ $current_router = str_replace(dirname($_SERVER['SCRIPT_NAME']),'',$current_route
 // var_dump($current_router);
 
 $router ->add('GET','/web','webController', 'index');
+
 //login register and register
 $router ->add('GET','/login','AuthController', 'showLogin');
 $router ->add('GET','/register','AuthController', 'showRegister');
@@ -58,6 +59,16 @@ $router ->add('GET','/register','AuthController', 'showRegister');
 
 $router ->add('POST','auth/login','AuthController', 'login');
 $router ->add('POST','auth/register','AuthController', 'register');
+
+//HomeController
+$router ->add('GET', '/home', 'HomeController','index'  );
+
+//CRUD PRODUCTOS//
+$router ->add('GET', 'productos/','ProductoController','index');
+$router ->add('GET', 'productos/obtener-Todo','ProductoController','obtenerProducto');
+
+
+
 
 
 //despachar la ruta actual

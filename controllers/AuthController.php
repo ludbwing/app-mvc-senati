@@ -9,7 +9,6 @@ class AuthController {
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
       $datebase = new Database();
       $this->db = $datebase->connect();
-
       $this-> usuario = new Usuario($this->db); 
     }
 
