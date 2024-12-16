@@ -79,17 +79,17 @@
                     <input type="hidden" id="productId">
                     <div class="mb-3">
                         <label for="name" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="name" required>
+                        <input type="text" class="form-control" id="nombre" required>
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="description" rows="3"></textarea>
+                        <textarea class="form-control" id="descripcion" rows="3"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="price" class="form-label">Precio</label>
                         <div class="input-group">
-                            <span class="input-group-text">$</span>
-                            <input type="number" class="form-control" id="price" step="0.01" required>
+                            <span class="input-group-text">S/.</span>
+                            <input type="number" class="form-control" id="precio" step="0.01" required>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -98,7 +98,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Imagen</label>
-                        <input type="file" class="form-control" id="image" accept="image/*">
+                        <input type="file" class="form-control" id="imagen" accept="image/*">
                         <div id="imagePreview" class="mt-2"></div>
                     </div>
                 </form>
@@ -107,7 +107,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="fas fa-times"></i> Cerrar
                 </button>
-                <button type="button" class="btn btn-primary" onclick="saveProduct()">
+                <button type="button" class="btn btn-primary" id="btnGuardarProducto">
                     <i class="fas fa-save"></i> Guardar
                 </button>
             </div>

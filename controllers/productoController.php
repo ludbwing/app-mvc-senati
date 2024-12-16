@@ -45,4 +45,70 @@ class ProductoController
             ]);
         }
     }
+
+
+
+    
+
+   //////////////TAREA/////////////////////
+
+
+
+
+
+
+
+   public function crear() {
+    header('Content-Type: application/json');
+
+    try {
+        $data = json_decode(file_get_contents("php://input"));
+
+        if (
+            empty($data->nombre) || 
+            empty($data->descripcion) ||
+            empty($data->precio) ||
+            empty($data->stock) ||
+            empty($data->imagen)
+        ) {
+            throw new Exception('Todos los campos son requeridos.');
+        }
+
+        $productoData = [
+            "nombre" => $data->nombre,
+            "descripcion" => $data->descripcion,
+            "precio" => $data->precio,
+            "stock" => $data->stock,
+            "imagen" => $data->imagen,
+        ];
+        
+
+        if ($this->producto->crearProducto($productoData)) {
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Producto registrado correctamente.',
+            ]);
+        } else {
+            throw new Exception('Error al registrar el producto.');
+        }
+
+    } catch (Exception $e) {
+        echo json_encode([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ]);
+    }
+}
+  public function actualizarProducto(){
+
+  }
+
+  public function eliminarProducto(){
+    
+  }
+
+
+  public function buscarProducto(){
+    
+  }
 }

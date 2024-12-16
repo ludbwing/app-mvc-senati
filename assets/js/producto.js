@@ -2,8 +2,9 @@
 //assets/js/producto.js
 
 document.addEventListener('DOMContentLoaded',function(){
-    
-    alert('Ludwing');
+    const botonGuardar = document.getElementById('btnGuardarProducto');
+    botonGuardar.addEventListener('click', crearProducto);
+  //  alert('Ludwing');
     obtenerProducto();
 })
 
@@ -15,9 +16,9 @@ async function obtenerProducto() {
         if (resultado.status === 'error') {
             throw new Error(resultado.message);
         }
-
+            
         const productos = resultado.data;
-        console.log(productos);
+       // console.log(productos);
 
         const tbody = document.getElementById('productsTableBody');
         tbody.innerHTML = '';
@@ -28,7 +29,7 @@ async function obtenerProducto() {
                 <td>${product.id_producto}</td>
                 <td>
                     ${product.imagen
-                        ? `<img src="assets/uploads/products/${product.imagen}" 
+                        ? `<img src="assets/uploads/${product.imagen}" 
                             alt="${product.nombre}" 
                             class="img-thumbnail" 
                             style="max-width: 50px; max-height: 50px;">`
@@ -55,6 +56,63 @@ async function obtenerProducto() {
         showAlert('error', 'Error al cargar los productos: ' + error.message);
     }
 }
+/////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+async function crearProducto(event) {
+    event.preventDefault(); 
+
+    const nombre = document.getElementById('nombre').value;
+    const descripcion = document.getElementById('descripcion').value;
+    const precio = document.getElementById('precio').value;
+    const stock = document.getElementById('stock').value;
+    const imagen = document.getElementById('imagen').value;
+
+    try {
+        const respuesta = await fetch('productos/crearProducto', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                nombre,
+                descripcion,
+                precio,
+                stock,
+                imagen,
+            }),
+        });
+
+        const respuestaJson = await respuesta.json();
+
+        if (respuestaJson.status === 'error') {
+            showAlertAuth('registerAlert', 'error', respuestaJson.message);
+            return;
+        }
+
+        showAlertAuth("registerAlert", "success", respuestaJson.message);
+        setTimeout(() => {
+            window.location.href = 'productos'; 
+        }, 1000);
+    } catch (error) {
+        const message = error.message || 'Error desconocido';
+    }
+    
+}
+
+
+
+
+/////////////////////////////////////////////
+
+
 
 function showAlert(type, message) {
     const alertContainer = document.getElementById('alertContainer');

@@ -19,24 +19,40 @@ class Producto {
         $stmt->execute();
         return $stmt;
     }
- 
-    public function crearProducto() {
+ ///////////////////////////7
+    public function crearProducto($Productodata) {
+        // Consulta SQL para insertar un nuevo producto.
         $query = "INSERT INTO producto  
-                (nombre, descripcion, precio, stock, imagen) 
-                VALUES (:nombre, :descripcion, :precio, :stock, :imagen)";
-        
+                  (nombre, descripcion, precio, stock, imagen) 
+                  VALUES (:nombre, :descripcion, :precio, :stock, :imagen)";
+    
+        // Asigna los datos recibidos a las propiedades del modelo.
+        $this->nombre = $Productodata['nombre'];
+        $this->descripcion = $Productodata['descripcion'];
+        $this->precio = $Productodata['precio'];
+        $this->stock = $Productodata['stock'];
+        $this->imagen = $Productodata['imagen'];
+    
+        // Prepara y ejecuta la consulta.
         $stmt = $this->conn->prepare($query);
-
         $stmt->bindParam(':nombre', $this->nombre);
         $stmt->bindParam(':descripcion', $this->descripcion);
         $stmt->bindParam(':precio', $this->precio);
         $stmt->bindParam(':stock', $this->stock);
         $stmt->bindParam(':imagen', $this->imagen);
-        if($stmt->execute()) {
-            return true;
+    
+        // Intenta ejecutar la consulta y devuelve el resultado.
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (PDOException $e) {
+            error_log("Error al insertar producto: " . $e->getMessage());
         }
+    
         return false;
     }
+    
 
     // public function read_single() {
     //     $query = "SELECT * FROM " . $this->table . " WHERE id = :id LIMIT 1";
@@ -56,7 +72,9 @@ class Producto {
     //     return false;
     // }
 
+///////////////////////////////////////////////
 
+///////////////////////////////////////////////
 
     public function actualizarProducto() {
         $query = "UPDATE producto
@@ -109,4 +127,5 @@ class Producto {
     //     $stmt->execute();
     //     return $stmt;
     // }
+  
 }

@@ -67,8 +67,12 @@ $router ->add('GET', '/home', 'HomeController','index'  );
 $router ->add('GET', 'productos/','ProductoController','index');
 $router ->add('GET', 'productos/obtener-Todo','ProductoController','obtenerProducto');
 
-
-
+/////////////////////TAREA//////////////////
+$router->add('POST', 'productos/crearProducto', 'ProductoController', 'crear');
+//////////////////
+$router->add('POST', 'productos/actualizar-producto', 'ProductoController', 'actualizarProducto');
+$router->add('DELETE', 'productos/eliminar-producto', 'ProductoController', 'eliminarProducto');
+$router->add('GET', 'productos/buscar-producto', 'ProductoController', 'buscarPorducto');
 
 
 //despachar la ruta actual
